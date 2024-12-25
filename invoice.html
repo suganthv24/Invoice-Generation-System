@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generation System</title>
+    <link rel="stylesheet" href="invoice.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>INVOICE GENERATOR</h2>
+        <form id="invoiceForm" class="invoice-form">
+            <h3>CUSTOMER DETAILS</h3>
+            <label>Customer Name:</label>
+            <input type="text" id="customerName" placeholder="Enter customer name" required>
+            <label>Customer Email Address:</label>
+            <input type="email" id="customerEmail" placeholder="Enter email address" required>
+            <label>Customer Address:</label>
+            <textarea id="customerAddress" rows="3" placeholder="Enter customer address" required></textarea>
+            <label>Date:</label>
+            <input type="date" id="invoiceDate" required>
+            <label>Invoice Number:</label>
+            <input type="text" id="invoiceNumber" placeholder="Enter invoice number" required>
+
+            <h3>COMPANY DETAILS</h3>
+            <label>Company Name:</label>
+            <input type="text" id="companyName" placeholder="Enter company name" required>
+            <label>Company Email Address:</label>
+            <input type="email" id="companyEmail" placeholder="Enter email address" required>
+            <label>Company Address:</label>
+            <textarea id="companyAddress" rows="3" placeholder="Enter company address" required></textarea>
+            <label>Contact Number:</label>
+            <input type="text" id="companyContact" placeholder="Enter contact number" required>
+            <label>GST/Tax ID:</label>
+            <input type="text" id="companyGST" placeholder="Enter GST/Tax ID" required>
+
+            <h3>ITEMS DETAILS</h3>
+            <div id="itemsContainer"></div>
+            <button type="button" onclick="addItem()">Add Item</button>
+            <br><br>
+            <label>Discount (%):</label>
+            <input type="number" id="discount" placeholder="Enter discount (optional)">
+            <button type="submit">Generate Invoice</button>
+        </form>
+    </div>
+
+    <div id="invoice" class="invoice-container">
+        <div class="invoice-header">
+            <h1><b>INVOICE</b></h1>
+            <h2><span id="displayCompanyName"></span></h2>
+            <h4><span id="displayCompanyEmail"></span></h4>
+            <h4><span id="displayCompanyAddress"></span></h4>
+            <p id="displayInvoiceNumber"></p>
+        </div>
+        <div class="invoice-details">
+            <p><strong>GST ID:</strong> <span id="displayCompanyGST"></span></p>
+            <p><strong>Contact:</strong> <span id="displayCompanyContact"></span></p>
+            <p><strong>Date:</strong> <span id="displayDate"></span></p>
+        </div>
+        <div class="billing-details">
+            <h3>BILLING TO:</h3>
+            <p><strong>Name:</strong> <span id="displayCustomerName"></span></p>
+            <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Address:</strong> <span id="displayCustomerAddress"></span></p>
+        </div>
+        <table class="invoice-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Tax (%)</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="invoiceItems"></tbody>
+        </table>
+        <pre><strong>Total Amount     : </strong> <span id="totalAmount"></span></pre>
+        <pre><strong>Total Tax        : </strong> <span id="totalTax"></span></pre>
+        <pre><strong>Discount Amount  : </strong> <span id="discountAmount"></span></pre>
+        <pre><strong>Total Amount Due : </strong> <span id="grandTotal"></span></pre>
+    </div>
+    <button id="printButton" onclick="printInvoice()">Print Invoice</button>
+    <button id="downloadButton" onclick="downloadInvoice()">Download Invoice</button>
+
+    <script src="invoice.js"></script>
+</body>
+</html>
